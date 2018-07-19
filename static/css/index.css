@@ -31,6 +31,7 @@
         color: #eb4012;
         font-size: 2em;
         line-height: 1em;
+        margin-top:5px; 
     }
     .timeDown p.downTime span{
         display: inline-block;
@@ -94,4 +95,50 @@
         display: block;
         color: #999;
         margin:5px 0px;
+    }
+    @media screen and (max-width:414px){
+        .container{
+            width: 414px;
+        }
+        .priceTitle{
+            width: 70%;
+        }
+        .timeDown{
+            width: 30%;
+        }
+        .timeDown p{
+            font-size: 1.5em;
+        }
+        .timeDown p.downTime span {
+            width: 25px;
+            height: 25px;
+            font-size: .8em;
+            line-height: 25px;
+        }
+        .progress{
+            width: 50%;
+        }
+        .guarantee p span {
+            font-size: .9em;
+        }
+    }
+    @media screen and (max-width:411px){
+        .container{
+            width: 411px;
+        }
+    }
+    @media screen and (max-width:375px){
+        .container{
+            width: 375px;
+        }
+    }
+    @media screen and (max-width:360px){
+        .container{
+            width: 360px;
+        }
+    }
+    @media screen and (max-width:320px){
+        .container{
+            width: 320px;
+        }
     }

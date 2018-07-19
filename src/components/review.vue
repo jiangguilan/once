@@ -13,10 +13,10 @@
                     </p>
                     <p class="rt">{{reviewUserName}}</p>
                 </div>
-                <div class="clear">
+                <div>
                     <p class="reviewMsg">{{reviewMsg}}</p>
-                    <img class="lt reviewImg" src="../../static/img/product/review-1.png">
-                    <span class="rt">{{reviewTime}}</span>
+                    <img class="reviewImg" src="../../static/img/product/review-1.png">
+                    <p class="reviewTime">{{reviewTime}}</p>
                 </div>
             </li>
         </ul>
@@ -60,6 +60,10 @@ ul li .reviewImg{
 .reviewMsg{
     color: #000;
     font-size: 1.2em;
+}
+.reviewTime{
+    text-align: right;
+    font-size: .8em;
 }
 </style>
 
