@@ -1,42 +1,62 @@
 <template>
     <div class="container">
-        <!-- <div class="banner"></div> -->
         <banner/>
         <div class="fixedTitle">
-            <div>
+            <div class="priceTitle lt">
                 <p>
-                    <span>RM:169</span>
-                    <span>RM:399</span>
+                    <span class="price">{{currency}}:{{price}}</span>
+                    <span class="originalPrice">{{currency}}:{{originalPrice}}</span>
                 </p>
-                <p>
-                    <span><img src="">Flash deals</span>
-                    <span>80%</span>
+                <p class="flashDeals">
+                    <span><img src="../../static/img/clock.png">Flash deals</span>
+                    <span class="progress">
+                        <span>80%</span> 
+                    </span>
                 </p>
             </div>
-            <div>
+            <div class="timeDown rt">
                 <p>Ends In</p>
-                <p>00:00:00</p>
+                <p class="downTime">
+                    <span>00</span> :
+                    <span>00</span> :
+                    <span>00</span>
+                </p>
             </div>
         </div>
-        <div class="soldProduct"></div>
-        <div class="productTitle"></div>
-        <div class="guarantee"></div>
-        <!-- <div class="reviewNum"></div>
-        <div class="reviewMsg"></div> -->
+        <div class="soldProduct">
+            <span class="soldNum">-6584-</span>
+            <span>Sold</span>
+        </div>
+        <div class="productTitle">{{productTitle}}</div>
+        <div class="guarantee clear">
+            <p class="lt">
+                <span>
+                    <img src="../../static/img/trick.png">
+                    Cash On Delivery 
+                </span>
+                <span>
+                    <img src="../../static/img/trick.png">
+                    Genuine Guarantee
+                </span>
+            </p>
+            <p class="rt">
+                <span>
+                    <img src="../../static/img/trick.png">
+                    Free Shipping  
+                </span>
+                <span>
+                    <img src="../../static/img/trick.png">
+                    7 Days Hassle Free Return
+                </span>
+            </p>
+        </div>
         <review/>
-        <!-- <div class="productDetail"></div> -->
         <productDetail/>
-        <!-- <div class="vedio"></div> -->
         <vedio/>
         <div class="purchaseGuide"></div>
-        <div class="buyNow">
-            <button>Buy Now</button>
-        </div>
-        <!-- <div class="selectProduct"></div> -->
+        <div class="buyNow submitButton">Buy Now</div>
         <selectProduct/>
-        <!-- <div class="userMsg"></div> -->
         <userMsg/>
-        <!-- <div class="complete"></div> -->
         <complete/>
     </div>
 </template>
@@ -53,7 +73,29 @@ export default {
     name: 'index',
     data () {
         return {
-            msg: 'hello index page'
+            currency: 'RM',
+            price: '169',
+            originalPrice: '399',
+            productTitle: 'Hurricane Spin Duster'
         }
     },
-    
+    components: {
+        'test': {
+            template:'<p>this is test</p>'
+        },
+        'banner': Banner,
+        'review': Review,
+        'productDetail': ProductDetail,
+        'vedio': Vedio,
+        'selectProduct': SelectProduct,
+        'userMsg': UserMsg,
+        'complete': Complete
+    }
+}
+</script>
+<style>
+@import '../../static/css/base.css';
+@import '../../static/css/index.css';
+</style>
+
+

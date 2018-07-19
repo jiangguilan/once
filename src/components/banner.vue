@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <h1>{{msg}}</h1>
+    <img src="../../static/img/product/main-1.jpg">
   </div>
 </template>
 <script>
@@ -16,5 +16,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.banner img {
+  width: 100%;
+}
 </style>

@@ -1,9 +1,7 @@
 body{
-font:14px "simhei",Arial,Helvetica,sans-serif;
-color:#666;
+/* font:14px "simhei",Arial,Helvetica,sans-serif; */
 margin:0;
 padding:0;
-background-color:#fff;
 }
 p,h1,h2,h3,h4,h5,h6,ul,ol,dl,dd{
 margin:0;
@@ -25,22 +23,35 @@ content:"";
 display:block;
 clear:both;
 }
-.left{
+.clear:before{
+	content: "";
+	display: table;
+}
+.lt{
 float:left;
 }
-.right{
+.rt{
 float:right;
 }
-.mainPage{
-width:100%;
-min-width:1000px;
-margin:0 auto;
+img {
+	vertical-align: bottom;
 }
-#header{
-width:100%;
-height:133px;
+.submitButton{
+	width: 100%;
+    height: 60px;
+    border: none;
+    background: #eb4012;
+    font-size: 2em;
+	color: #fff;
+	text-align: center;
+	line-height: 60px;
 }
-#footer{
-	width:100%;
-	height:300px;
+.submitButton:hover {
+	box-shadow: 0px 0px 5px #ccc;
+	cursor: pointer;
+}
+.exit{
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
