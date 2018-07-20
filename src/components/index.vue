@@ -10,16 +10,16 @@
                 <p class="flashDeals">
                     <span><img src="../../static/img/clock.png">Flash deals</span>
                     <span class="progress">
-                        <span>80%</span> 
+                        <span id="progress">80%</span> 
                     </span>
                 </p>
             </div>
             <div class="timeDown rt">
                 <p>Ends In</p>
                 <p class="downTime">
-                    <span>00</span> :
-                    <span>00</span> :
-                    <span>00</span>
+                    <span id="hour">{{hour}}</span> :
+                    <span id="minute">{{minute}}</span> :
+                    <span id="second">{{second}}</span>
                 </p>
             </div>
         </div>
@@ -76,7 +76,10 @@ export default {
             currency: 'RM',
             price: '169',
             originalPrice: '399',
-            productTitle: 'Hurricane Spin Duster'
+            productTitle: 'Hurricane Spin Duster',
+            hour: '00',
+            minute: '00',
+            second: '00'
         }
     },
     components: {
@@ -91,16 +94,102 @@ export default {
         'userMsg': UserMsg,
         'complete': Complete
     },
-    created: function () {
-        //在一个实例被创建之后执行代码
+    methods:{
+        timeDown:function (){
+            // var that=this;
+            function timer(intDiff){
+                var interval = setInterval(function(){
+                    var day=0,hour=0,minute=0,second=0,ms=0;      
+                    if(intDiff > 0){
+                        day = Math.floor(intDiff / (60 * 60 * 24));
+                        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                        ms = Math.floor(intDiff*1000) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60)-(second*1000);
+                    }else {
+                        clearInterval(interval);
+                        interval = null;
+                        getTime();
+                    }
+                    if (minute <= 9) minute = '0' + minute;
+                    if (second <= 9) second = '0' + second;
+                    intDiff--;
+                    document.getElementById("hour").innerHTML=hour;
+                    document.getElementById("minute").innerHTML=minute;
+                    document.getElementById("second").innerHTML=second;
+                    // that.hour=hour;//待做
+                    // that.minute=minute;
+                    // that.second=second;
+                    // that.$set(that.second,'second',second);
+                    // console.log(that.hour,that.minute,that.second)
+                }, 1000);
+            } 
+            function getTime(){
+                if(window.localStorage){
+                    var timeSec = localStorage.getItem("time");
+                    var now = new Date().getTime();
+                    if(timeSec && now <= timeSec){
+                        var secs = parseInt((timeSec - now)/1000);
+                        timer(secs);
+                    }else{
+                        localStorage.setItem("time",new Date().getTime()+3600*1000);
+                        timer(3600);
+                    }
+                }
+            };
+            getTime();
+        },
+        progressDown: function () {
+            var start=80,end=98,interval=end-start,speed=1,totalTime=interval*speed,intervalSpeed=speed*1000,htmlProgress;
+            function progress(inter){
+                inter=Math.ceil(inter/speed);
+                var timeInterval=setInterval(function(){
+                    if(inter < 0){
+                        clearInterval(timeInterval);
+                        timeInterval=null;
+                    }else{
+                        htmlProgress=(totalTime/speed-inter)+start;
+                        document.getElementById("progress").innerHTML=htmlProgress+"%";
+                        document.getElementById("progress").style.width=htmlProgress+"%";
+                    }
+                    inter--;
+                },intervalSpeed)
+            }
+            function get(){
+                if(window.localStorage){
+                    var now=parseInt(new Date().getTime())/1000;
+                    var localTime=localStorage.getItem("localTime");
+                    if(localTime != null){
+                        if(localTime<now){
+                            document.getElementById("progress").innerHTML="98%";
+                            document.getElementById("progress").style.width="98%";
+                        }else if(localTime>now){
+                            var inter=parseInt(localTime-now);
+                            progress(inter)
+                        }
+                    }else{
+                        progress(totalTime)
+                        localStorage.setItem("localTime",parseInt(new Date().getTime()/1000)+totalTime);
+                    }  
+                }
+            }
+            get();
+        }
+    },
+    created: function () {//在一个实例被创建之后执行代码
+        this.timeDown(),
+        this.progressDown()
     },
     mounted: function () {
 
     },
     updated: function ()  {
-
+        
     },
     destroyed: function () {
+        progressDown=null
+    },
+    computed: {
         
     }
 }
