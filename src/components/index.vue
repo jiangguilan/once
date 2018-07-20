@@ -90,6 +90,18 @@ export default {
         'selectProduct': SelectProduct,
         'userMsg': UserMsg,
         'complete': Complete
+    },
+    created: function () {
+        //在一个实例被创建之后执行代码
+    },
+    mounted: function () {
+
+    },
+    updated: function ()  {
+
+    },
+    destroyed: function () {
+        
     }
 }
 </script>
