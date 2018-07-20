@@ -140,7 +140,7 @@ export default {
             getTime();
         },
         progressDown: function () {
-            var start=80,end=98,interval=end-start,speed=1,totalTime=interval*speed,intervalSpeed=speed*1000,htmlProgress;
+            var start=80,end=98,interval=end-start,speed=30,totalTime=interval*speed,intervalSpeed=speed*1000,htmlProgress;
             function progress(inter){
                 inter=Math.ceil(inter/speed);
                 var timeInterval=setInterval(function(){
@@ -177,17 +177,17 @@ export default {
         }
     },
     created: function () {//在一个实例被创建之后执行代码
-        this.timeDown(),
-        this.progressDown()
+        // this.progressDown()
     },
     mounted: function () {
+        this.timeDown(),
+        this.progressDown()//问题：30秒时间戳过后才显示原来的变化
 
     },
     updated: function ()  {
         
     },
     destroyed: function () {
-        progressDown=null
     },
     computed: {
         
