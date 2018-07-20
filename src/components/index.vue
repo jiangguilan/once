@@ -99,7 +99,8 @@ export default {
     },
     methods:{
         timeDown:function (){
-            // var that=this;
+            var that=this;
+            // console.log(this);
             function timer(intDiff){
                 var interval = setInterval(function(){
                     var day=0,hour=0,minute=0,second=0,ms=0;      
@@ -117,13 +118,14 @@ export default {
                     if (minute <= 9) minute = '0' + minute;
                     if (second <= 9) second = '0' + second;
                     intDiff--;
-                    document.getElementById("hour").innerHTML=hour;
-                    document.getElementById("minute").innerHTML=minute;
-                    document.getElementById("second").innerHTML=second;
-                    // that.hour=hour;//待做
-                    // that.minute=minute;
-                    // that.second=second;
+                    // document.getElementById("hour").innerHTML=hour;
+                    // document.getElementById("minute").innerHTML=minute;
+                    // document.getElementById("second").innerHTML=second;
+                    that.hour=hour;//待做
+                    that.minute=minute;
+                    that.second=second;
                     // that.$set(that.second,'second',second);
+                    // console.log(that);
                     // console.log(that.hour,that.minute,that.second)
                 }, 1000);
             } 
@@ -146,6 +148,15 @@ export default {
             var start=80,end=98,interval=end-start,speed=30,totalTime=interval*speed,intervalSpeed=speed*1000,htmlProgress;
             function progress(inter){
                 inter=Math.ceil(inter/speed);
+                    if(inter < 0){
+                        clearInterval(timeInterval);
+                        timeInterval=null;
+                    }else{
+                        htmlProgress=(totalTime/speed-inter)+start;
+                        document.getElementById("progress").innerHTML=htmlProgress+"%";
+                        document.getElementById("progress").style.width=htmlProgress+"%";
+                    }
+                    inter--;
                 var timeInterval=setInterval(function(){
                     if(inter < 0){
                         clearInterval(timeInterval);
