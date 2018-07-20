@@ -54,10 +54,12 @@
         <productDetail/>
         <vedio/>
         <div class="purchaseGuide"></div>
-        <div class="buyNow submitButton">Buy Now</div>
-        <selectProduct/>
-        <userMsg/>
-        <complete/>
+        <div class="buyNow submitButton" @click="buyNow">Buy Now</div>
+        <div class="selectProductShow" v-show="selectProductShow">
+            <selectProduct/>
+            <userMsg/>
+            <complete/>
+        </div>
     </div>
 </template>
 <script>
@@ -79,7 +81,8 @@ export default {
             productTitle: 'Hurricane Spin Duster',
             hour: '00',
             minute: '00',
-            second: '00'
+            second: '00',
+            selectProductShow: false
         }
     },
     components: {
@@ -174,6 +177,10 @@ export default {
                 }
             }
             get();
+        },
+        buyNow: function () {
+            this.selectProductShow=true;
+            // console.log(this.selectProductShow)
         }
     },
     created: function () {//在一个实例被创建之后执行代码

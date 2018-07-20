@@ -43,8 +43,10 @@ export default {
     background: #fff;
     border-radius: 20px;
     box-shadow: 0px 0px 5px #ccc;
-    position: relative;
+    position: absolute;
     box-sizing: border-box;
+    bottom: 0;
+    width: 100%;
 }
 .showSelected,.attr{
     border-bottom: 1px solid #ddd;
