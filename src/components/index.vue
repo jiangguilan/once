@@ -10,7 +10,7 @@
                 <p class="flashDeals">
                     <span><img src="../../static/img/clock.png">Flash deals</span>
                     <span class="progress">
-                        <span id="progress">80%</span> 
+                        <span ref="progressWidth" id="progress">{{productProgress}}</span> 
                     </span>
                 </p>
             </div>
@@ -82,7 +82,9 @@ export default {
             hour: '00',
             minute: '00',
             second: '00',
-            selectProductShow: false
+            selectProductShow: false,
+            productProgress: '80%'
+            // progressWidth: '80px'
         }
     },
     components: {
@@ -146,6 +148,7 @@ export default {
         },
         progressDown: function () {
             var start=80,end=98,interval=end-start,speed=30,totalTime=interval*speed,intervalSpeed=speed*1000,htmlProgress;
+            var that = this;
             function progress(inter){
                 inter=Math.ceil(inter/speed);
                     if(inter < 0){
@@ -153,8 +156,8 @@ export default {
                         timeInterval=null;
                     }else{
                         htmlProgress=(totalTime/speed-inter)+start;
-                        document.getElementById("progress").innerHTML=htmlProgress+"%";
-                        document.getElementById("progress").style.width=htmlProgress+"%";
+                        that.productProgress=htmlProgress+'%';
+                        that.$refs.progressWidth.style.width = htmlProgress +'%';
                     }
                     inter--;
                 var timeInterval=setInterval(function(){
@@ -163,8 +166,8 @@ export default {
                         timeInterval=null;
                     }else{
                         htmlProgress=(totalTime/speed-inter)+start;
-                        document.getElementById("progress").innerHTML=htmlProgress+"%";
-                        document.getElementById("progress").style.width=htmlProgress+"%";
+                        that.productProgress=htmlProgress+'%';
+                        that.$refs.progressWidth.style.width = htmlProgress +'%';
                     }
                     inter--;
                 },intervalSpeed)
@@ -175,8 +178,8 @@ export default {
                     var localTime=localStorage.getItem("localTime");
                     if(localTime != null){
                         if(localTime<now){
-                            document.getElementById("progress").innerHTML="98%";
-                            document.getElementById("progress").style.width="98%";
+                            that.productProgress='98%';
+                            that.$refs.progressWidth.style.width="98%";
                         }else if(localTime>now){
                             var inter=parseInt(localTime-now);
                             progress(inter)
